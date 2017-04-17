@@ -1,0 +1,6 @@
+# Gotracer
+
+A Whitted Raytracer written in Go.
+
+
+Inspired by the Raytracer created for CPSC 453 at the University of Calgary, [CPSC 453 HW 4](https://github.com/mcgillowen/cpsc453-hw4)
