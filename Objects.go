@@ -25,8 +25,8 @@ func solveQuadratic(floats [3]float64) (x1, x2 float64, ret bool) {
 	return
 }
 
-// ObjectOps are operations for computing normals or intersections
-type ObjectOps interface {
+// Intersectable are objects that can intercept rays
+type Intersectable interface {
 	Intersection(r Ray) Point
 	Normal(p Point) Point
 }
