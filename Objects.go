@@ -61,12 +61,23 @@ func (a Point) DotProduct(b Point) float64 {
 	return a.X*b.X + a.Y*b.Y + a.Z*b.Z
 }
 
+// Length of the point/vector
+func (a Point) Length() float64 {
+	return math.Sqrt(a.X*a.X + a.Y*a.Y + a.Z*a.Z)
+}
+
 // Normalize the reference point/vector
 func (a *Point) Normalize() {
-	len := math.Sqrt(a.X*a.X + a.Y*a.Y + a.Z*a.Z)
+	len := a.Length()
 	a.X = a.X / len
 	a.Y = a.Y / len
 	a.Z = a.Z / len
+}
+
+// Reflect the ray at the point p with normal
+func (r Ray) Reflect(normal, p Point) Ray {
+	v := r.V.Subtract((normal.Multiply(2).Multiply((r.V.DotProduct(normal)))))
+	return Ray{p, v}
 }
 
 // Ray representation from the camera
