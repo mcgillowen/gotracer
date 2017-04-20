@@ -1,4 +1,4 @@
-package gotracer
+package primitives
 
 import (
 	"math"
@@ -6,7 +6,7 @@ import (
 )
 
 // InfinitePoint for representing a non-valid point
-var infinitePoint = Point{1e20, 1e20, 1e20}
+var InfinitePoint = Point{1e20, 1e20, 1e20}
 
 // Lambda is to prevent
 const lambda = 1e6
@@ -108,20 +108,20 @@ func (tri *Triangle) Intersection(r Ray) Point {
 
 	u := (r.V.CrossProduct(side2).DotProduct(side1)) * invDet
 	if u < 0 || u > 1 {
-		return infinitePoint
+		return InfinitePoint
 	}
 
 	v := (side3.CrossProduct(side1).DotProduct(r.V)) * invDet
 	if v < 0 || v > 1 {
-		return infinitePoint
+		return InfinitePoint
 	}
 
 	if u+v >= 1 {
-		return infinitePoint
+		return InfinitePoint
 	}
 	t := (side3.CrossProduct(side1).DotProduct(side2)) * invDet
 	if t < 0 {
-		return infinitePoint
+		return InfinitePoint
 	}
 
 	t = t - lambda
@@ -137,7 +137,7 @@ func (s *Sphere) Intersection(r Ray) Point {
 	coeff[2] = (r.P.Subtract(s.Center)).DotProduct((r.P.Subtract(s.Center))) - s.Radius*s.Radius
 	x1, x2, real := solveQuadratic(coeff)
 	if !real {
-		return infinitePoint
+		return InfinitePoint
 	}
 	if x1 > x2 {
 		x1, x2 = x2, x1
@@ -145,7 +145,7 @@ func (s *Sphere) Intersection(r Ray) Point {
 	if x1 < 0 {
 		x1 = x2
 		if x1 < 0 {
-			return infinitePoint
+			return InfinitePoint
 		}
 	}
 	x1 = x1 - lambda

@@ -1,4 +1,4 @@
-package gotracer
+package primitives
 
 import (
 	"math"
